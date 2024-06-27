@@ -1,0 +1,34 @@
+#sidebar {
+    dock: left;
+    width: 25;
+    margin-top: 1;
+}
+
+#player1 {
+    border: round red;
+}
+
+#player2 {
+    border: round blue;
+}
+
+.form-group {
+    margin: 1;
+    padding: 0 1;
+    background: $boost;
+    height: 11;
+}
+
+.form-group-label {
+    width: 100%;
+    margin-bottom: 1;
+    text-align: center;
+}
+
+.sponsor {
+    width: 1fr;
+}
+
+.tag {
+    width: 3fr;
+}

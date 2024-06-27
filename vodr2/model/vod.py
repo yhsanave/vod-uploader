@@ -19,12 +19,12 @@ class VOD:
     path: str
     processed: bool = False
 
-    tournament: startgg.Tournament = None
-    event: startgg.Event = None
-    phase: startgg.Phase = None
-    set: startgg.Set = None
+    tournament: startgg.Tournament
+    event: startgg.Event
+    phase: startgg.Phase
+    set: startgg.Set
 
-    templateArgs: templates.TemplateArgs = None
+    templateArgs: templates.TemplateArgs
     title: str = ''
     description: str = ''
 
@@ -70,23 +70,23 @@ class VOD:
         grid.add_column(justify='right')
         grid.add_column()
 
-        grid.add_row('Tournament [green]\[1][/]:',
+        grid.add_row(r'Tournament [green]\[1][/]:',
                      self.templateArgs.tournamentName)
-        grid.add_row('Tournament Short [green]\[2][/]:',
+        grid.add_row(r'Tournament Short [green]\[2][/]:',
                      self.templateArgs.tournamentShort)
-        grid.add_row('Link [green]\[3][/]:', self.templateArgs.tournamentLink)
-        grid.add_row('Event [green]\[4][/]:', self.templateArgs.eventName)
-        grid.add_row('Phase [green]\[5][/]:', self.templateArgs.phaseName)
-        grid.add_row('Round [green]\[6][/]:', self.templateArgs.roundFull)
-        grid.add_row('Round Short [green]\[7][/]:',
+        grid.add_row(r'Link [green]\[3][/]:', self.templateArgs.tournamentLink)
+        grid.add_row(r'Event [green]\[4][/]:', self.templateArgs.eventName)
+        grid.add_row(r'Phase [green]\[5][/]:', self.templateArgs.phaseName)
+        grid.add_row(r'Round [green]\[6][/]:', self.templateArgs.roundFull)
+        grid.add_row(r'Round Short [green]\[7][/]:',
                      self.templateArgs.roundShort)
-        grid.add_row('Game [green]\[8][/]:', self.templateArgs.game)
-        grid.add_row('Player 1 [green]\[9][/]:', self.templateArgs.player1)
-        grid.add_row('Player 2 [green]\[10][/]:', self.templateArgs.player2)
+        grid.add_row(r'Game [green]\[8][/]:', self.templateArgs.game)
+        grid.add_row(r'Player 1 [green]\[9][/]:', self.templateArgs.player1)
+        grid.add_row(r'Player 2 [green]\[10][/]:', self.templateArgs.player2)
         grid.add_row(
-            'Player 1 Characters [green]\[11][/]:', self.templateArgs.player1Chars)
+            r'Player 1 Characters [green]\[11][/]:', self.templateArgs.player1Chars)
         grid.add_row(
-            'Player 2 Characters [green]\[12][/]:', self.templateArgs.player2Chars)
+            r'Player 2 Characters [green]\[12][/]:', self.templateArgs.player2Chars)
 
         return Panel(grid, title='Edit Values', expand=False)
 
@@ -103,23 +103,23 @@ class VOD:
 
     def set_arg(self, index: int, value: str):
         args = [None for _ in range(len(ARGUMENTS_LIST)+1)]
-        args[index] = value
-        self.set_template_args(*args)
+        args[index] = value # type: ignore
+        self.set_template_args(*args) # type: ignore
 
     def set_template_args(self,
-                          templateArgs: templates.TemplateArgs = None,
-                          tournamentName: str = None,
-                          tournamentShort: str = None,
-                          tournamentLink: str = None,
-                          eventName: str = None,
-                          phaseName: str = None,
-                          roundFull: str = None,
-                          roundShort: str = None,
-                          game: str = None,
-                          player1: str = None,
-                          player2: str = None,
-                          player1Chars: str = None,
-                          player2Chars: str = None) -> None:
+                          templateArgs: templates.TemplateArgs | None = None,
+                          tournamentName: str | None = None,
+                          tournamentShort: str | None = None,
+                          tournamentLink: str | None = None,
+                          eventName: str | None = None,
+                          phaseName: str | None = None,
+                          roundFull: str | None = None,
+                          roundShort: str | None = None,
+                          game: str | None = None,
+                          player1: str | None = None,
+                          player2: str | None = None,
+                          player1Chars: str | None = None,
+                          player2Chars: str | None = None) -> None:
         if templateArgs:
             self.templateArgs = templateArgs
         else:
@@ -158,7 +158,7 @@ class VOD:
 
 
 if __name__ == '__main__':
-    from vod import VOD
+    from model.vod import VOD
     from startgg import Tournament
     v = VOD('test.mov')
     t = Tournament('LoL60')
